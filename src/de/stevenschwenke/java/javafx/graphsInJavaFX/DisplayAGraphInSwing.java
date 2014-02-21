@@ -11,21 +11,11 @@ public class DisplayAGraphInSwing extends JFrame {
 
 	public DisplayAGraphInSwing() {
 
-		Node root = new Node("root");
-		Node c1 = new Node("Children 1");
-		root.addChildren(c1);
-		Node c2 = new Node("Children 2");
-		root.addChildren(c2);
-		Node c21 = new Node("Children 2.1");
-		c2.addChildren(c21);
-		Node c22 = new Node("Children 2.2");
-		c2.addChildren(c22);
-
 		mxGraph graph = new mxGraph();
 		Object parent = graph.getDefaultParent();
 		graph.getModel().beginUpdate();
 		try {
-			insertRecursivelyIntoGraph(root, null, graph);
+			insertRecursivelyIntoGraph(GraphGenerator.generateGraph(), null, graph);
 		} finally {
 			graph.getModel().endUpdate();
 		}
