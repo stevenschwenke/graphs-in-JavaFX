@@ -8,6 +8,8 @@ import de.stevenschwenke.java.javafx.graphsInJavaFX.business.BusinessNode;
 
 public class BusinessGraphToJGraphXConverter {
 
+	private static boolean interpretChildrenAsInnerNodes = true;
+
 	public static mxGraph convertIntoJGraphXGraph(BusinessNode generatedGraph) {
 		mxGraph graph = new mxGraph();
 		Object parent = graph.getDefaultParent();
@@ -34,8 +36,10 @@ public class BusinessGraphToJGraphXConverter {
 			}
 		} else {
 			// node is an inner node or a leaf
-			Object jGraphXChild = graph.insertVertex(graph.getDefaultParent(), null, node.getName(), 0, 0, 80, 30);
-			graph.insertEdge(graph.getDefaultParent(), null, "", jGraphXParent, jGraphXChild);
+			Object parent = interpretChildrenAsInnerNodes ? jGraphXParent : graph.getDefaultParent();
+
+			Object jGraphXChild = graph.insertVertex(parent, null, node.getName(), 0, 0, 80, 30);
+			graph.insertEdge(parent, null, "", jGraphXParent, jGraphXChild);
 
 			for (BusinessNode c : node.getChildren()) {
 				insertRecursivelyIntoGraph(c, jGraphXChild, graph);
