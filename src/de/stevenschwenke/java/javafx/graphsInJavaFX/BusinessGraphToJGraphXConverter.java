@@ -4,9 +4,9 @@ import com.mxgraph.layout.mxGraphLayout;
 import com.mxgraph.layout.hierarchical.mxHierarchicalLayout;
 import com.mxgraph.view.mxGraph;
 
-public class GraphConverter {
+public class BusinessGraphToJGraphXConverter {
 
-	public static mxGraph convertIntoJGraphXGraph(Node generatedGraph) {
+	public static mxGraph convertIntoJGraphXGraph(BusinessNode generatedGraph) {
 		mxGraph graph = new mxGraph();
 		Object parent = graph.getDefaultParent();
 		graph.getModel().beginUpdate();
@@ -21,13 +21,13 @@ public class GraphConverter {
 		return graph;
 	}
 
-	private static void insertRecursivelyIntoGraph(Node node, Object jGraphXParent, mxGraph graph) {
+	private static void insertRecursivelyIntoGraph(BusinessNode node, Object jGraphXParent, mxGraph graph) {
 
 		if (jGraphXParent == null) {
 			// node is the root node
 			Object jGraphXRoot = graph.insertVertex(graph.getDefaultParent(), null, node.getName(), 0, 0, 80, 30);
 
-			for (Node c : node.getChildren()) {
+			for (BusinessNode c : node.getChildren()) {
 				insertRecursivelyIntoGraph(c, jGraphXRoot, graph);
 			}
 		} else {
@@ -35,7 +35,7 @@ public class GraphConverter {
 			Object jGraphXChild = graph.insertVertex(graph.getDefaultParent(), null, node.getName(), 0, 0, 80, 30);
 			graph.insertEdge(graph.getDefaultParent(), null, "", jGraphXParent, jGraphXChild);
 
-			for (Node c : node.getChildren()) {
+			for (BusinessNode c : node.getChildren()) {
 				insertRecursivelyIntoGraph(c, jGraphXChild, graph);
 			}
 		}

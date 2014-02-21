@@ -2,15 +2,15 @@ package de.stevenschwenke.java.javafx.graphsInJavaFX;
 
 public class GraphGenerator {
 
-	public static Node generateGraph() {
-		Node root = new Node("root");
-		Node c1 = new Node("Children 1");
+	public static BusinessNode generateGraph() {
+		BusinessNode root = new BusinessNode("root");
+		BusinessNode c1 = new BusinessNode("Children 1");
 		root.addChildren(c1);
-		Node c2 = new Node("Children 2");
+		BusinessNode c2 = new BusinessNode("Children 2");
 		root.addChildren(c2);
-		Node c21 = new Node("Children 2.1");
+		BusinessNode c21 = new BusinessNode("Children 2.1");
 		c2.addChildren(c21);
-		Node c22 = new Node("Children 2.2");
+		BusinessNode c22 = new BusinessNode("Children 2.2");
 		c2.addChildren(c22);
 		return root;
 	}

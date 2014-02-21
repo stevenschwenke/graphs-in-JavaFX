@@ -3,18 +3,18 @@ package de.stevenschwenke.java.javafx.graphsInJavaFX;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Node {
+public class BusinessNode {
 
 	private String name;
 
-	private Set<Node> children = new HashSet<Node>();
+	private Set<BusinessNode> children = new HashSet<BusinessNode>();
 
-	public Node(String name) {
+	public BusinessNode(String name) {
 		super();
 		this.name = name;
 	}
 
-	public void addChildren(Node newChildren) {
+	public void addChildren(BusinessNode newChildren) {
 		children.add(newChildren);
 	}
 
@@ -22,11 +22,11 @@ public class Node {
 		return name;
 	}
 
-	public Set<Node> getChildren() {
+	public Set<BusinessNode> getChildren() {
 		return children;
 	}
 
-	public void setChildren(Set<Node> children) {
+	public void setChildren(Set<BusinessNode> children) {
 		this.children = children;
 	}
 
