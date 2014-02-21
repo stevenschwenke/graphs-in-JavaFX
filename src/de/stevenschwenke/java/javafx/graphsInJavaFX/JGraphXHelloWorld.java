@@ -5,8 +5,8 @@ import javax.swing.JFrame;
 import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.view.mxGraph;
 
-public class HelloWorld extends JFrame {
-	public HelloWorld() {
+public class JGraphXHelloWorld extends JFrame {
+	public JGraphXHelloWorld() {
 		super("Hello, World!");
 		mxGraph graph = new mxGraph();
 		Object parent = graph.getDefaultParent();
@@ -23,7 +23,7 @@ public class HelloWorld extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		HelloWorld frame = new HelloWorld();
+		JGraphXHelloWorld frame = new JGraphXHelloWorld();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(400, 320);
 		frame.setVisible(true);

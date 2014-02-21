@@ -8,7 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-public class Start extends Application {
+public class JavaFXHelloWorld extends Application {
 	public static void main(String[] args) {
 		launch(args);
 	}
