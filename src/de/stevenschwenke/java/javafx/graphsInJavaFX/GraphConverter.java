@@ -6,7 +6,7 @@ import com.mxgraph.view.mxGraph;
 
 public class GraphConverter {
 
-	public static mxGraph x(Node generatedGraph) {
+	public static mxGraph convertIntoJGraphXGraph(Node generatedGraph) {
 		mxGraph graph = new mxGraph();
 		Object parent = graph.getDefaultParent();
 		graph.getModel().beginUpdate();

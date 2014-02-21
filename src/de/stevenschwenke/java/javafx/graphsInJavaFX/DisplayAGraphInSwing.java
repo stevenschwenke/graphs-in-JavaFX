@@ -9,7 +9,7 @@ public class DisplayAGraphInSwing extends JFrame {
 
 	public DisplayAGraphInSwing() {
 
-		mxGraph graph = GraphConverter.x(GraphGenerator.generateGraph());
+		mxGraph graph = GraphConverter.convertIntoJGraphXGraph(GraphGenerator.generateGraph());
 
 		mxGraphComponent graphComponent = new mxGraphComponent(graph);
 		getContentPane().add(graphComponent);

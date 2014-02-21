@@ -7,6 +7,8 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
+import com.mxgraph.view.mxGraph;
+
 public class DisplayAGraphInJavaFX extends Application {
 	public static void main(String[] args) {
 		launch(args);
@@ -17,12 +19,14 @@ public class DisplayAGraphInJavaFX extends Application {
 		primaryStage.setTitle("Hello World!");
 
 		StackPane root = new StackPane();
-		root.getChildren().addAll(convertIntoFXNodes(GraphGenerator.generateGraph()));
+		de.stevenschwenke.java.javafx.graphsInJavaFX.Node generateGraph = GraphGenerator.generateGraph();
+		mxGraph graph = GraphConverter.convertIntoJGraphXGraph(generateGraph);
+		root.getChildren().addAll(convertIntoFXNodes(graph));
 		primaryStage.setScene(new Scene(root, 300, 250));
 		primaryStage.show();
 	}
 
-	private Node convertIntoFXNodes(de.stevenschwenke.java.javafx.graphsInJavaFX.Node generateGraph) {
+	private Node convertIntoFXNodes(mxGraph graph) {
 		// TODO
 		return new Button("Test");
 	}
