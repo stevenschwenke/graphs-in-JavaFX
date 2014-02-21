@@ -11,20 +11,21 @@ public class DisplayAGraphInSwing extends JFrame {
 
 	public DisplayAGraphInSwing() {
 
-		// Node root = new Node("root");
-		// Node c1 = new Node("Children 1");
-		// root.addChildren(c1);
-		// Node c2 = new Node("Children 2");
-		// root.addChildren(c2);
+		Node root = new Node("root");
+		Node c1 = new Node("Children 1");
+		root.addChildren(c1);
+		Node c2 = new Node("Children 2");
+		root.addChildren(c2);
+		Node c21 = new Node("Children 2.1");
+		c2.addChildren(c21);
+		Node c22 = new Node("Children 2.2");
+		c2.addChildren(c22);
 
 		mxGraph graph = new mxGraph();
 		Object parent = graph.getDefaultParent();
 		graph.getModel().beginUpdate();
 		try {
-			Object v1 = graph.insertVertex(parent, null, "Hello", 20, 20, 80, 30);
-			Object v2 = graph.insertVertex(parent, null, "World!", 240, 150, 80, 30);
-			graph.insertEdge(parent, null, "Edge", v1, v2);
-
+			insertRecursivelyIntoGraph(root, null, graph);
 		} finally {
 			graph.getModel().endUpdate();
 		}
@@ -34,6 +35,26 @@ public class DisplayAGraphInSwing extends JFrame {
 
 		mxGraphComponent graphComponent = new mxGraphComponent(graph);
 		getContentPane().add(graphComponent);
+	}
+
+	private void insertRecursivelyIntoGraph(Node node, Object jGraphXParent, mxGraph graph) {
+
+		if (jGraphXParent == null) {
+			// node is the root node
+			Object jGraphXRoot = graph.insertVertex(graph.getDefaultParent(), null, node.getName(), 0, 0, 80, 30);
+
+			for (Node c : node.getChildren()) {
+				insertRecursivelyIntoGraph(c, jGraphXRoot, graph);
+			}
+		} else {
+			// node is an inner node or a leaf
+			Object jGraphXChild = graph.insertVertex(graph.getDefaultParent(), null, node.getName(), 0, 0, 80, 30);
+			graph.insertEdge(graph.getDefaultParent(), null, "", jGraphXParent, jGraphXChild);
+
+			for (Node c : node.getChildren()) {
+				insertRecursivelyIntoGraph(c, jGraphXChild, graph);
+			}
+		}
 	}
 
 	public static void main(String[] args) {
