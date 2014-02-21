@@ -5,6 +5,8 @@ import javax.swing.JFrame;
 import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.view.mxGraph;
 
+import de.stevenschwenke.java.javafx.graphsInJavaFX.business.GraphGenerator;
+
 public class DisplayAGraphInSwing extends JFrame {
 
 	public DisplayAGraphInSwing() {

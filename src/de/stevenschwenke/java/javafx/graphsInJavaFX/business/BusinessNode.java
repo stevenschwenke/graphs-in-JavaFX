@@ -1,4 +1,4 @@
-package de.stevenschwenke.java.javafx.graphsInJavaFX;
+package de.stevenschwenke.java.javafx.graphsInJavaFX.business;
 
 import java.util.HashSet;
 import java.util.Set;

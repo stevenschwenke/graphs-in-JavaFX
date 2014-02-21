@@ -4,6 +4,8 @@ import com.mxgraph.layout.mxGraphLayout;
 import com.mxgraph.layout.hierarchical.mxHierarchicalLayout;
 import com.mxgraph.view.mxGraph;
 
+import de.stevenschwenke.java.javafx.graphsInJavaFX.business.BusinessNode;
+
 public class BusinessGraphToJGraphXConverter {
 
 	public static mxGraph convertIntoJGraphXGraph(BusinessNode generatedGraph) {

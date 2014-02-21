@@ -17,6 +17,8 @@ import com.mxgraph.model.mxICell;
 import com.mxgraph.util.mxPoint;
 import com.mxgraph.view.mxGraph;
 
+import de.stevenschwenke.java.javafx.graphsInJavaFX.business.GraphGenerator;
+
 public class DisplayAGraphInJavaFX extends Application {
 	public static void main(String[] args) {
 		launch(args);
@@ -27,7 +29,7 @@ public class DisplayAGraphInJavaFX extends Application {
 		primaryStage.setTitle("Hello World!");
 
 		AnchorPane root = new AnchorPane();
-		de.stevenschwenke.java.javafx.graphsInJavaFX.BusinessNode generateGraph = GraphGenerator.generateGraph();
+		de.stevenschwenke.java.javafx.graphsInJavaFX.business.BusinessNode generateGraph = GraphGenerator.generateGraph();
 		mxGraph graph = BusinessGraphToJGraphXConverter.convertIntoJGraphXGraph(generateGraph);
 		root.getChildren().addAll(convertIntoFXNodes(graph));
 		primaryStage.setScene(new Scene(root, 600, 500));
