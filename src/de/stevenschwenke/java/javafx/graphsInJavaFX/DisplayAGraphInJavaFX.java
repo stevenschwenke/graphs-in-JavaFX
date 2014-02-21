@@ -7,12 +7,14 @@ import javafx.application.Application;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 
 import com.mxgraph.model.mxCell;
 import com.mxgraph.model.mxGeometry;
 import com.mxgraph.model.mxICell;
+import com.mxgraph.util.mxPoint;
 import com.mxgraph.view.mxGraph;
 
 public class DisplayAGraphInJavaFX extends Application {
@@ -24,11 +26,11 @@ public class DisplayAGraphInJavaFX extends Application {
 	public void start(Stage primaryStage) {
 		primaryStage.setTitle("Hello World!");
 
-		StackPane root = new StackPane();
+		AnchorPane root = new AnchorPane();
 		de.stevenschwenke.java.javafx.graphsInJavaFX.BusinessNode generateGraph = GraphGenerator.generateGraph();
 		mxGraph graph = BusinessGraphToJGraphXConverter.convertIntoJGraphXGraph(generateGraph);
 		root.getChildren().addAll(convertIntoFXNodes(graph));
-		primaryStage.setScene(new Scene(root, 300, 250));
+		primaryStage.setScene(new Scene(root, 600, 500));
 		primaryStage.show();
 	}
 
@@ -44,16 +46,31 @@ public class DisplayAGraphInJavaFX extends Application {
 
 				String value = (String) childAt.getValue();
 				Button b = new Button(value);
-				double x = geometry.getCenterX();
+				double x = geometry.getX();
 				b.translateXProperty().set(x);
-				double y = geometry.getCenterY();
+				double y = geometry.getY();
 				b.translateYProperty().set(y);
 				nodes.add(b);
 
-				System.out.println("Added node \"" + value + "\" (" + x + ", " + y);
+				System.out.println("Added node \"" + value + "\" at (" + x + ", " + y + ")");
 			}
 			if (childAt.isEdge()) {
-				System.out.println("Edge " + i + ": " + childAt.getValue());
+
+				mxGeometry geometry = childAt.getGeometry();
+
+				mxPoint lastPoint = null;
+				for (mxPoint controlPoint : geometry.getPoints()) {
+					if (lastPoint == null) {
+						lastPoint = controlPoint;
+						continue;
+					}
+
+					Line l = new Line(controlPoint.getX(), controlPoint.getY(), lastPoint.getX(), lastPoint.getY());
+					nodes.add(l);
+					lastPoint = controlPoint;
+				}
+
+				System.out.println("Added edge " + childAt.getValue() + " with " + geometry.getPoints().size() + " control points");
 			}
 		}
 
