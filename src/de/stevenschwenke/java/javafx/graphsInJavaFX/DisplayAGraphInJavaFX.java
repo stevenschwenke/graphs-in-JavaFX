@@ -1,5 +1,8 @@
 package de.stevenschwenke.java.javafx.graphsInJavaFX;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javafx.application.Application;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -29,23 +32,31 @@ public class DisplayAGraphInJavaFX extends Application {
 		primaryStage.show();
 	}
 
-	private Node convertIntoFXNodes(mxGraph graph) {
+	private Set<Node> convertIntoFXNodes(mxGraph graph) {
+		Set<Node> nodes = new HashSet<Node>();
+
 		Object[] cells = graph.getCellsForGroup(new Object[] { graph.getDefaultParent() });
 		mxCell cell = (mxCell) cells[0];
 		for (int i = 0; i < cell.getChildCount(); i++) {
 			mxICell childAt = cell.getChildAt(i);
 			if (childAt.isVertex()) {
-				System.out.println("Vertex " + i + ": " + childAt.getValue());
 				mxGeometry geometry = childAt.getGeometry();
-				Button b = new Button((String) childAt.getValue());
-				b.translateXProperty().set(geometry.getCenterX());
-				b.translateYProperty().set(geometry.getCenterY());
+
+				String value = (String) childAt.getValue();
+				Button b = new Button(value);
+				double x = geometry.getCenterX();
+				b.translateXProperty().set(x);
+				double y = geometry.getCenterY();
+				b.translateYProperty().set(y);
+				nodes.add(b);
+
+				System.out.println("Added node \"" + value + "\" (" + x + ", " + y);
 			}
 			if (childAt.isEdge()) {
 				System.out.println("Edge " + i + ": " + childAt.getValue());
 			}
 		}
 
-		return new Button("Test");
+		return nodes;
 	}
 }
